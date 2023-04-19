@@ -9,8 +9,16 @@
         <servlet-class>controller.both.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>StudentLoginServlet</servlet-name>
-        <servlet-class>controller.auth.student.StudentLoginServlet</servlet-class>
+        <servlet-name>StudentLoginController</servlet-name>
+        <servlet-class>controller.auth.student.StudentLoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LectureHomeController</servlet-name>
+        <servlet-class>controller.lecture.LectureHomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentHomeController</servlet-name>
+        <servlet-class>controller.student.StudentHomeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LectureLoginController</servlet-name>
@@ -21,8 +29,16 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>StudentLoginServlet</servlet-name>
+        <servlet-name>StudentLoginController</servlet-name>
         <url-pattern>/student/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureHomeController</servlet-name>
+        <url-pattern>/lecture/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentHomeController</servlet-name>
+        <url-pattern>/student/home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
