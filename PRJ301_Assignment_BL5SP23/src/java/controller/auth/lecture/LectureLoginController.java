@@ -5,12 +5,14 @@
 
 package controller.auth.lecture;
 
+import dal.AccountDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Account;
 
 /**
  *
@@ -54,6 +56,7 @@ public class LectureLoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         request.getRequestDispatcher("../view/lecture/auth/login.jsp").forward(request, response);
+        
     } 
 
     /** 
@@ -66,7 +69,23 @@ public class LectureLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email").trim().toLowerCase();
+        String password = request.getParameter("password");
+        AccountDBContext db = new AccountDBContext();
+        Account account = db.getAccount(email, password);
+        
+        if(account == null)
+        {
+            request.setAttribute("notice", "Incorrect email or password!");
+            request.getRequestDispatcher("../view/lecture/auth/login.jsp").forward(request, response);
+   
+        }
+        else
+        {
+            response.sendRedirect("home");
+        }
+        
+        
     }
 
     /** 
