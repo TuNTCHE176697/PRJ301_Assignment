@@ -44,7 +44,7 @@
                                 <a href="#"><i style="color: black;" class="fa-solid fa-earth-americas"></i> Language</a>
                                 <a href="#"><i style="color: black;" class="fa-solid fa-comment"></i> Feedback</a>
                                 <a href="#"><i style="color: black;" class="fa-solid fa-circle-half-stroke"></i> Dark Mode (Off)</a>
-                                <a href="#"><i style="color: black;" class="fa-solid fa-right-from-bracket"></i> Logout</a>
+                                <a href="logout"><i style="color: black;" class="fa-solid fa-right-from-bracket"></i> Logout</a>
                             </div>
                         </div>
                     </div>      
