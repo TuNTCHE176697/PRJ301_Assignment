@@ -21,13 +21,14 @@ public class AccountDBContext extends DBContext{
         
         try {
             
-            String sql = "Select [email], [password], [username]"
-                    + " from [Acount]"
+            String sql = "Select [email], [password], [username] "
+                    + "from [Acount] "
                     + "where [email] = ? and [password] = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, email);
             stm.setString(2, password);
             ResultSet rs = stm.executeQuery();
+            
             if(rs.next())
             {
                 Account a = new Account();
@@ -44,5 +45,10 @@ public class AccountDBContext extends DBContext{
         return null;
     }
 
-    
+    /*public static void main(String[] args) {
+        
+        Account a = new AccountDBContext().getAccount("BanTQ3@fpt.edu.vn", "112");
+        System.out.println(a.getUsername());
+      
+}*/
 }

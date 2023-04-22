@@ -19,7 +19,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
-        </head>
+    </head>
     <body>
         <button type="button" class="btn btn-danger btn-floating btn-lg" id="btn-back-to-top">
             <i class="fas fa-arrow-up"></i> Back to top
@@ -39,7 +39,10 @@
                             <div class="dropdown-content" >
                                 <a href="information">
                                     <i style="color: black;" class="fa-solid fa-address-card"></i>
-                                    
+                                    <c:if test ="${sessionScope.account ne null}">
+                                        <b>${sessionScope.account.username}</b>
+                                    </c:if>
+
                                 </a>
                                 <a href="#"><i style="color: black;" class="fa-solid fa-earth-americas"></i> Language</a>
                                 <a href="#"><i style="color: black;" class="fa-solid fa-comment"></i> Feedback</a>
@@ -86,7 +89,9 @@
                     <div class="col-md-10 right">
                         <p>
                             Hello 
-                            
+                            <c:if test ="${sessionScope.account ne null}">
+                                <b>${sessionScope.account.username}</b>
+                            </c:if>
                             Nice to see you back
                         </p>
                         <div class="banner">

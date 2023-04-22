@@ -24,6 +24,10 @@
         <servlet-name>LectureLogoutController</servlet-name>
         <servlet-class>controller.auth.lecture.LectureLogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LectureInformationController</servlet-name>
+        <servlet-class>controller.lecture.LectureInformationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LectureLoginController</servlet-name>
         <url-pattern>/lecture/login</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>LectureLogoutController</servlet-name>
         <url-pattern>/lecture/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureInformationController</servlet-name>
+        <url-pattern>/lecture/information</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

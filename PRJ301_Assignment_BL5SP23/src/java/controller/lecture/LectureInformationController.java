@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.auth.lecture;
+package controller.lecture;
 
-import dal.AccountDBContext;
+import dal.LectureDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,12 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
+import model.Lecture;
 
 /**
  *
  * @author admin
  */
-public class LectureLoginController extends HttpServlet {
+public class LectureInformationController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,10 +36,10 @@ public class LectureLoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LectureLoginController</title>");  
+            out.println("<title>Servlet LectureInformationController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LectureLoginController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LectureInformationController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,8 +56,11 @@ public class LectureLoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("../view/lecture/auth/login.jsp").forward(request, response);
-        
+        LectureDBContext db = new LectureDBContext();
+        Account account = (Account) request.getSession().getAttribute("account");
+        Lecture lecture = db.getLecture(db.getIdByEmail(account.getEmail()));
+        request.setAttribute("lecture", lecture);
+        request.getRequestDispatcher("../view/lecture/information.jsp").forward(request, response);
     } 
 
     /** 
@@ -69,24 +73,25 @@ public class LectureLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email").trim().toLowerCase();
-        String password = request.getParameter("password");
-        AccountDBContext db = new AccountDBContext();
-        Account account = db.getAccount(email, password);
+        String raw_dob = request.getParameter("dob");
+        String raw_phone = request.getParameter("phone");
+        String raw_address = request.getParameter("address");
         
-        if(account == null)
-        {
-            request.setAttribute("notice", "Incorrect email or password!");
-            request.getRequestDispatcher("../view/lecture/auth/login.jsp").forward(request, response);
-   
-        }
-        else
-        {
-            request.getSession().setAttribute("account", account);
-            response.sendRedirect("home");
-        }
+        String dob = raw_dob;
+        String phone = raw_phone;
+        String address = raw_address;
         
+        Account account = (Account) request.getSession().getAttribute("account");
+        LectureDBContext db = new LectureDBContext();
         
+        Lecture lecture = db.getLecture(db.getIdByEmail(account.getEmail()));
+        lecture.setDob(dob);
+        lecture.setPhone(phone); 
+        lecture.setAddress(address);
+        
+        db.updateLecture(lecture);
+        request.setAttribute("noti", "Information updated!");
+        doGet(request, response);
     }
 
     /** 
