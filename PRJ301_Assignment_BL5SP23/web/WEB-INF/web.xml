@@ -28,6 +28,10 @@
         <servlet-name>LectureInformationController</servlet-name>
         <servlet-class>controller.lecture.LectureInformationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LectureTimetableController</servlet-name>
+        <servlet-class>controller.lecture.LectureTimetableController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LectureLoginController</servlet-name>
         <url-pattern>/lecture/login</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>LectureInformationController</servlet-name>
         <url-pattern>/lecture/information</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LectureTimetableController</servlet-name>
+        <url-pattern>/lecture/timetable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

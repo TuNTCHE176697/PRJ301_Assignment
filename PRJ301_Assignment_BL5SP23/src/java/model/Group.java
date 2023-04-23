@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author admin
  */
-class Group {
+public class Group {
     private int id;
     private String name;
     private Subject subject;

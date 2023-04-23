@@ -3,23 +3,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.auth.lecture;
+package controller.lecture;
 
-import dal.AccountDBContext;
 import dal.LectureDBContext;
+import dal.TimeSlotDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Date;
 import model.Account;
+import model.Session;
+import model.TimeSlot;
+import util.DateTimeHelper;
 
 /**
  *
  * @author admin
  */
-public class LectureLoginController extends HttpServlet {
+public class LectureTimetableController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -30,19 +35,47 @@ public class LectureLoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LectureLoginController</title>");  
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LectureLoginController at " + request.getContextPath () + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        String email = request.getParameter("email");        
+        LectureDBContext LecDB = new LectureDBContext();
+        int leid = LecDB.getIdByEmail(email);
+        
+        String raw_from = request.getParameter("from");
+        java.sql.Date from = null;
+        java.sql.Date to = null;
+        
+        
+        if(raw_from == null || raw_from.length() == 0)
+        {
+            Date today = new Date();
+            Date raw_to = DateTimeHelper.addDays(today, 6);
+            from = DateTimeHelper.toDateSql(today);
+            to = DateTimeHelper.toDateSql(raw_to);
         }
+        else
+        {
+            from = java.sql.Date.valueOf(raw_from);
+            Date e_from = DateTimeHelper.toDateUtil(from);
+            Date raw_to = DateTimeHelper.addDays(e_from, 6);
+            to = DateTimeHelper.toDateSql(raw_to);
+        }
+        
+        ArrayList<java.sql.Date> dates = DateTimeHelper.getDatesList(from, to);
+        request.setAttribute("leid", leid);
+        request.setAttribute("from", from);
+        request.setAttribute("to", to);
+        request.setAttribute("dates", dates);
+        
+        TimeSlotDBContext TimeDB = new TimeSlotDBContext();
+        ArrayList<TimeSlot> slots = TimeDB.getSlots();
+        request.setAttribute("slots", slots);
+        
+        ArrayList<Session> sessions = LecDB.getSessions(leid);
+        request.setAttribute("sessions", sessions);
+        
+        request.getRequestDispatcher("../view/lecture/timetable.jsp").forward(request, response);
+        
+        
+       
     } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -56,8 +89,7 @@ public class LectureLoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("../view/lecture/auth/login.jsp").forward(request, response);
-        
+        processRequest(request, response);
     } 
 
     /** 
@@ -70,27 +102,7 @@ public class LectureLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email").trim().toLowerCase();
-        String password = request.getParameter("password");
-        AccountDBContext db = new AccountDBContext();
-        Account account = db.getAccount(email, password);
-        
-        if(account == null)
-        {
-            request.setAttribute("notice", "Incorrect email or password!");
-            request.getRequestDispatcher("../view/lecture/auth/login.jsp").forward(request, response);
-   
-        }
-        else
-        {
-            LectureDBContext Lecdb = new LectureDBContext();
-            int leid = Lecdb.getIdByEmail(account.getEmail());
-            request.getSession().setAttribute("account", account);
-            request.getSession().setAttribute("leid", leid);
-            response.sendRedirect("home");
-        }
-        
-        
+        processRequest(request, response);
     }
 
     /** 

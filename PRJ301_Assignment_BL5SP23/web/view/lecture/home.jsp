@@ -17,7 +17,8 @@
 
         <!-- link font-awesome -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+       
+        <!-- link style.css -->
         <link href="../css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
@@ -61,7 +62,7 @@
                     <div class="col-md-2 left">
                         <ul style="padding: 0;">
                             <li>
-                                <a href="#" ><i class="fas fa-table"></i> Timetable</a>
+                                <a href="timetable?email=${sessionScope.account.email}" ><i class="fas fa-table"></i> Timetable</a>
                             </li>
                             <li>
                                 <a href="#" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
