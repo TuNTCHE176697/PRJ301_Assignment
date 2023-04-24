@@ -7,6 +7,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Attendance;
@@ -152,5 +153,66 @@ public class SessionDBContext extends DBContext{
         }
 
     }
-
+    public ArrayList<Session> GetSessionsByGroupId(int gid_input) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        String sql = "SELECT ses.[index],ses.seid,ses.date,ses.attend,g.gid,g.gname,r.rid,r.rname,t.tid,t.tname, t.description, l.leid, l.lename\n"
+                + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
+                + "           	      INNER JOIN Room r ON r.rid = ses.rid\n"
+                + "                   INNER JOIN TimeSlot t ON t.tid = ses.tid\n"
+                + "		      INNER JOIN Lecture l on l.leid = ses.leid\n"
+                + "		      INNER JOIN Student_Group sg ON sg.gid = g.gid\n"
+                + "                   INNER JOIN Student stu ON stu.stuid = sg.stuid\n"
+                + "WHERE g.gid = ?";
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+        
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, gid_input);
+            rs = stm.executeQuery();
+            
+            while (rs.next())
+            {
+                Session s = new Session();
+                s.setIndex(rs.getInt("index"));
+                s.setId(rs.getInt("seid"));
+                s.setDate(rs.getDate("date"));
+                s.setAttendated(rs.getBoolean("attend"));
+                
+                Group g = new Group();
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                s.setGroup(g);
+                
+                
+                Room r = new Room();
+                r.setId(rs.getInt("rid"));
+                r.setName(rs.getString("rname"));
+                s.setRoom(r);
+                
+                TimeSlot t = new TimeSlot();
+                t.setId(rs.getInt("tid"));
+                t.setName(rs.getString("tname"));
+                t.setDescription(rs.getString("description"));
+                s.setTimeslot(t);
+                
+                Lecture l = new Lecture();
+                l.setId(rs.getInt("leid"));
+                l.setName(rs.getString("lename"));
+                s.setLecture(l);
+                
+                sessions.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+}
+/*public static void main(String[] args) {
+        //int i =  new StudentDBContext().getIdByEmail("TuNTCHE176697@fpt.edu.vn");
+        //Student s = new StudentDBContext().getStudent(i);
+        ArrayList<Session> sessions = new SessionDBContext().GetSessionsByGroupId(3);
+        //System.out.println(i);
+        System.out.println(sessions);
+}*/
 }

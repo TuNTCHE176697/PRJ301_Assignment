@@ -63,10 +63,10 @@
                                 <a href="timetable?email=${sessionScope.account.email}" ><i class="fas fa-table"></i> Timetable</a>
                             </li>
                             <li>
-                                <a href="#" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
+                                <a href="attendancereport?email=${sessionScope.account.email}&gid=-1" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
                             </li>
                             <li>
-                                <a href="#" ><i class="fas fa-calendar-check"></i> News</a>
+                                <a href="#" ><i class="fas fa-calendar-check"></i> Mark Report</a>
                             </li>
                             <li>
                                 <a href="#" ><i class="fa-solid fa-comment"></i> Feedback</a>
