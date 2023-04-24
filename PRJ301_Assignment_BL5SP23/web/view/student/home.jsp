@@ -35,11 +35,13 @@
                     <div class="nav-pc-left">               
                         <a href="#"><i class="fa-solid fa-bell"></i></a>
                         <div class="dropdown nav-pc-left">
-                            <a href="#"><i class="fa-solid fa-user-tie"></i></a>
+                            <a href="information"><i class="fa-solid fa-user-tie"></i></a>
                             <div class="dropdown-content" >
                                 <a href="information">
                                     <i style="color: black;" class="fa-solid fa-address-card"></i>
-                                    
+                                    <c:if test ="${sessionScope.account ne null}">
+                                        <b>${sessionScope.account.username}</b>
+                                    </c:if>
                                 </a>
                                 <a href="#"><i style="color: black;" class="fa-solid fa-earth-americas"></i> Language</a>
                                 <a href="#"><i style="color: black;" class="fa-solid fa-comment"></i> Feedback</a>
@@ -64,7 +66,7 @@
                                 <a href="#" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
                             </li>
                             <li>
-                                <a href="#" ><i class="fas fa-calendar-check"></i> Take Attendance</a>
+                                <a href="#" ><i class="fas fa-calendar-check"></i> News</a>
                             </li>
                             <li>
                                 <a href="#" ><i class="fa-solid fa-comment"></i> Feedback</a>
@@ -86,11 +88,13 @@
                     <div class="col-md-10 right">
                         <p>
                             Hello 
-                            
+                            <c:if test ="${sessionScope.account ne null}">
+                                <b>${sessionScope.account.username}</b>
+                            </c:if>
                             Nice to see you back
                         </p>
                         <div class="banner">
-                            <img style="width: 100%; border-radius: 9px;" src="https://scontent.fhan5-8.fna.fbcdn.net/v/t39.30808-6/341470798_875888624106977_4933184179781551004_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=Cg1pR1siTskAX9343K2&_nc_ht=scontent.fhan5-8.fna&oh=00_AfCJdLeNL5bJTMzZDNCdfWUidiunYirvux2H7DgxGeEilw&oe=6444A855">
+                            <img style="width: 100%; border-radius: 9px;" src="../img/banner.jpg">
                         </div>
                         <div >
 

@@ -125,11 +125,17 @@
                                 <div class="row">
                                     <nav class="nav font-weight-500 mb-1 mb-sm-2 mb-lg-5 px-sm-2 px-lg-5"> <a class="nav-link " href="../lecture/login">Lecture</a> <a class="nav-link ac" href="login">Student</a> </nav>
                                 </div>
-                                <form onsubmit="event.preventDefault()" name="myform" onsubmit="" class="px-5 pb-5">
+                                <form action ="login" method="post"  name="myform"  class="px-5 pb-5">
                                     <div class="d-flex"> <img src="https://emojigraph.org/media/google/woman-teacher_1f469-200d-1f3eb.png" height="35px" width="35px" alt="" class="mr-3 mt-2">
                                         <h3 class="font-weight-bold">Student Login</h3>
-                                    </div> <input type="text" name="userid" placeholder="User"> <input type="password" name="passw" placeholder="Password"> <span class="ac" id="forgot">Forgot?</span> <button class="text-white text-weight-bold bt">Continue</button>
-                                    <h5 class="ac" id="register">Register</h5>
+                                    </div> 
+                                    <form>
+                                    <input type="text" name="email" placeholder="Email"/> 
+                                           <input type="password" name="password" placeholder="Password"/> 
+                                           <span class="ac" id="forgot">Forgot?</span> 
+                                           <p>${notice}</p>
+                                           <input class="text-white text-weight-bold bt" type="submit" value="Continue" />
+                                   
                                 </form>
                             </div>
                         </div>

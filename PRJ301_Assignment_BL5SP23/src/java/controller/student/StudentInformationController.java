@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.auth.student;
+package controller.student;
 
-import dal.AccountDBContext;
-import dal.LectureDBContext;
+import dal.StudentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,12 +13,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Account;
+import model.Student;
 
 /**
  *
  * @author admin
  */
-public class StudentLoginController extends HttpServlet {
+public class StudentInformationController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,10 +36,10 @@ public class StudentLoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StudentLoginServlet</title>");  
+            out.println("<title>Servlet StudentInformationController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StudentLoginServlet at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet StudentInformationController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -56,7 +56,11 @@ public class StudentLoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("../view/student/auth/login.jsp").forward(request, response);
+        Account acc =(Account) request.getSession().getAttribute("account");
+        StudentDBContext db = new StudentDBContext();
+        Student student = db.getStudent(db.getIdByEmail(acc.getEmail()));
+        request.setAttribute("student", student);
+        request.getRequestDispatcher("../view/student/information.jsp").forward(request, response);
     } 
 
     /** 
@@ -69,22 +73,25 @@ public class StudentLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String email = request.getParameter("email").trim().toLowerCase();
-        String password = request.getParameter("password");
-        AccountDBContext db = new AccountDBContext();
-        Account account = db.getAccount(email, password);
+       String raw_dob = request.getParameter("dob");
+        String raw_phone = request.getParameter("phone");
+        String raw_address = request.getParameter("address");
         
-        if(account == null)
-        {
-            request.setAttribute("notice", "Incorrect email or password!");
-            request.getRequestDispatcher("../view/student/auth/login.jsp").forward(request, response);
-   
-        }
-        else
-        {          
-            request.getSession().setAttribute("account", account);
-            response.sendRedirect("home");
-        }
+        String dob = raw_dob;
+        String phone = raw_phone;
+        String address = raw_address;
+        
+        Account account = (Account) request.getSession().getAttribute("account");
+        StudentDBContext db = new StudentDBContext();
+        
+        Student student = db.getStudent(db.getIdByEmail(account.getEmail()));
+        student.setDob(dob);
+        student.setPhone(phone); 
+        student.setAddress(address);
+        
+        db.update(student);
+        request.setAttribute("noti", "Information updated!");
+        doGet(request, response);
     }
 
     /** 

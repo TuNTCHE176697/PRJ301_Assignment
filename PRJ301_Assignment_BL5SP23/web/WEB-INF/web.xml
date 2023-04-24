@@ -36,6 +36,10 @@
         <servlet-name>LectureTakeAttendanceController</servlet-name>
         <servlet-class>controller.lecture.LectureTakeAttendanceController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentInformationController</servlet-name>
+        <servlet-class>controller.student.StudentInformationController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LectureLoginController</servlet-name>
         <url-pattern>/lecture/login</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>LectureTakeAttendanceController</servlet-name>
         <url-pattern>/lecture/takeattend</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentInformationController</servlet-name>
+        <url-pattern>/student/information</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
