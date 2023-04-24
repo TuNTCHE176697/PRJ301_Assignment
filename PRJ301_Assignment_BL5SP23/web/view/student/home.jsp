@@ -60,7 +60,7 @@
                     <div class="col-md-2 left">
                         <ul style="padding: 0;">
                             <li>
-                                <a href="#" ><i class="fas fa-table"></i> Timetable</a>
+                                <a href="timetable?email=${sessionScope.account.email}" ><i class="fas fa-table"></i> Timetable</a>
                             </li>
                             <li>
                                 <a href="#" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
