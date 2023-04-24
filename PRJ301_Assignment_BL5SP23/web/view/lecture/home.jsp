@@ -96,7 +96,7 @@
                             Nice to see you back
                         </p>
                         <div class="banner">
-                            <img style="width: 100%; border-radius: 9px;" src="https://scontent.fhan5-8.fna.fbcdn.net/v/t39.30808-6/341470798_875888624106977_4933184179781551004_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=730e14&_nc_ohc=Cg1pR1siTskAX9343K2&_nc_ht=scontent.fhan5-8.fna&oh=00_AfCJdLeNL5bJTMzZDNCdfWUidiunYirvux2H7DgxGeEilw&oe=6444A855">
+                            <img style="width: 100%; border-radius: 9px;" src="../img/banner.jpg">
                         </div>
                         <div >
 

@@ -10,7 +10,7 @@ import java.util.ArrayList;
  *
  * @author admin
  */
-class Student {
+public class Student {
     private int id;
     private String name;
     private String email;
@@ -32,6 +32,9 @@ class Student {
         this.address = address;
         this.mid = mid;
     }
+
+    public Student() {
+        }
 
     public int getId() {
         return id;
