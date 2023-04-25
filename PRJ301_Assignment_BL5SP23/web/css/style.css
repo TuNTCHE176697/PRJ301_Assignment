@@ -195,8 +195,10 @@ body {
             }
             .dhead{
                 text-align: center;
-                margin: 3px 0px 3px 0px;
-                background-image: linear-gradient(to left, rgb(201, 41, 198) ,rgb(28, 63, 205));
+                margin: 3px 0px 3px 0px;                
+            }
+            .dhead tr:first-child {
+             background-color: #99111d;
             }
             .table{
                 height: 100%;
@@ -257,8 +259,12 @@ body {
 
             .table-details .dhead{
                 color: white;
-                background-image: linear-gradient(to left, rgb(201, 41, 198) ,rgb(28, 63, 205));
+                }
+            
+            .table-details tr.dhead:first-child {
+             background-color: #99111d;
             }
+            
             .table-details img{
                 width: 20px;
             }
@@ -272,6 +278,11 @@ body {
             .gcontent{
                 text-align: center;
             }
+            
+            .gcontent tr:first-child {
+             background-color: #99111d;
+            }
+            
             .gcontent a{
                 text-decoration: none;
             }

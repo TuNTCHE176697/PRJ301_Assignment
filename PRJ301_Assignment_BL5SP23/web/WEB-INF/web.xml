@@ -60,6 +60,10 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.both.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentLogoutController</servlet-name>
+        <servlet-class>controller.auth.student.StudentLogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LectureLoginController</servlet-name>
         <url-pattern>/lecture/login</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentLogoutController</servlet-name>
+        <url-pattern>/student/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

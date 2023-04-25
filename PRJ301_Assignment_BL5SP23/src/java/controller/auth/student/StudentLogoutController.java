@@ -3,29 +3,20 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.student;
+package controller.auth.student;
 
-import controller.both.BaseAuthController;
-import dal.GroupDBContext;
-import dal.SessionDBContext;
-import dal.StudentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import model.Attendance;
-import model.Group;
-import model.Session;
-import model.Student;
 
 /**
  *
  * @author admin
  */
-public class StudentAttendanceReportController extends BaseAuthController {
+public class StudentLogoutController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -36,29 +27,9 @@ public class StudentAttendanceReportController extends BaseAuthController {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        
-        String email = request.getParameter("email");
-        StudentDBContext StuDB = new StudentDBContext();
-        int stuid = StuDB.getIdByEmail(email);
-        Student student = StuDB.getStudent(stuid);
-        request.setAttribute("student", student); 
-                      
-        int gid = Integer.parseInt(request.getParameter("gid"));
-        GroupDBContext GroupDB = new GroupDBContext();
-        Group group = GroupDB.getGroup(gid); 
-        request.setAttribute("group", group);
-        
-        ArrayList<Group> groups = GroupDB.getGroupsByStudentId(stuid);
-        request.setAttribute("groups", groups);
-        
-        SessionDBContext sesDB = new SessionDBContext();
-        ArrayList<Session> sessionsByGid = sesDB.GetSessionsByGroupIdandStuID(gid,stuid);
-        request.setAttribute("sessionsByGid", sessionsByGid);
-            
-        request.setAttribute("email", email);
-        request.getRequestDispatcher("../view/student/attendancereport.jsp").forward(request, response);
-    }
-    
+        request.getSession().setAttribute("account", null);
+        request.getRequestDispatcher("login").forward(request, response);
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -69,7 +40,7 @@ public class StudentAttendanceReportController extends BaseAuthController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
@@ -82,7 +53,7 @@ public class StudentAttendanceReportController extends BaseAuthController {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }
