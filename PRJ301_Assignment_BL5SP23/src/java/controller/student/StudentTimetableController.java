@@ -5,6 +5,7 @@
 
 package controller.student;
 
+import controller.both.BaseAuthController;
 import dal.LectureDBContext;
 import dal.SessionDBContext;
 import dal.StudentDBContext;
@@ -25,7 +26,7 @@ import util.DateTimeHelper;
  *
  * @author admin
  */
-public class StudentTimetableController extends HttpServlet {
+public class StudentTimetableController extends BaseAuthController {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -85,7 +86,7 @@ public class StudentTimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
@@ -98,7 +99,7 @@ public class StudentTimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }

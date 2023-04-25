@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import model.Attendance;
 import model.Group;
 import model.Lecture;
 import model.Major;
@@ -92,56 +93,60 @@ public class StudentDBContext extends DBContext {
 
     public ArrayList<Session> getSessions(int id) {
         ArrayList<Session> sessions = new ArrayList<>();
-        String sql = "SELECT ses.seid,ses.date,ses.attend,g.gid,g.gname,s.subid,s.subname,r.rid,r.rname,t.tid,t.tname, t.description, l.leid, l.lename\n"
+        String sql = "SELECT ses.seid,ses.date,ses.attend,g.gid,g.gname,s.subid,s.subname,r.rid,r.rname,t.tid,t.tname, t.description, l.leid, l.lename, a.present\n"
                 + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
-                + "           	      INNER JOIN Room r ON r.rid = ses.rid\n"
-                + "		      INNER JOIN Subject s ON s.subid = g.subid\n"
-                + "                   INNER JOIN TimeSlot t ON t.tid = ses.tid\n"
-                + "		      INNER JOIN Lecture l on l.leid = ses.leid\n"
-                + "		      INNER JOIN Student_Group sg ON sg.gid = g.gid\n"
-                + "                   INNER JOIN Student stu ON stu.stuid = sg.stuid\n"
+                + "INNER JOIN Room r ON r.rid = ses.rid\n"
+                + "INNER JOIN Subject s ON s.subid = g.subid\n"
+                + "INNER JOIN TimeSlot t ON t.tid = ses.tid\n"
+                + "INNER JOIN Lecture l on l.leid = ses.leid\n"
+                + "INNER JOIN Student_Group sg ON sg.gid = g.gid\n"
+                + "INNER JOIN Student stu ON stu.stuid = sg.stuid\n"
+                + "LEFT JOIN Attendance a on a.stuid = stu.stuid and a.seid = ses.seid\n"
                 + "WHERE stu.stuid = ?";
         PreparedStatement stm = null;
         ResultSet rs = null;
-        
+
         try {
             stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
             rs = stm.executeQuery();
-            
-            while (rs.next())
-            {
+
+            while (rs.next()) {
                 Session s = new Session();
                 s.setId(rs.getInt("seid"));
                 s.setDate(rs.getDate("date"));
                 s.setAttendated(rs.getBoolean("attend"));
-                
+
                 Group g = new Group();
                 g.setId(rs.getInt("gid"));
                 g.setName(rs.getString("gname"));
                 s.setGroup(g);
-                
+
                 Subject su = new Subject();
                 su.setId(rs.getInt("subid"));
                 su.setName(rs.getString("subname"));
                 g.setSubject(su);
-                
+
                 Room r = new Room();
                 r.setId(rs.getInt("rid"));
                 r.setName(rs.getString("rname"));
                 s.setRoom(r);
-                
+
                 TimeSlot t = new TimeSlot();
                 t.setId(rs.getInt("tid"));
                 t.setName(rs.getString("tname"));
                 t.setDescription(rs.getString("description"));
                 s.setTimeslot(t);
-                
+
                 Lecture l = new Lecture();
                 l.setId(rs.getInt("leid"));
                 l.setName(rs.getString("lename"));
                 s.setLecture(l);
                 
+                Attendance a = new Attendance();
+                a.setPresent(rs.getBoolean("present"));
+                s.setAttendance(a);
+
                 sessions.add(s);
             }
         } catch (SQLException ex) {
@@ -152,9 +157,9 @@ public class StudentDBContext extends DBContext {
 
     /*public static void main(String[] args) {
         int i =  new StudentDBContext().getIdByEmail("TuNTCHE176697@fpt.edu.vn");
-        Student s = new StudentDBContext().getStudent(i);
-        //ArrayList<Session> sessions = new LectureDBContext().getSessions(i);
-        System.out.println(i);
-        System.out.println(s);
+        //Student s = new StudentDBContext().getStudent(i);
+        ArrayList<Session> sessions = new StudentDBContext().getSessions(i);
+        //System.out.println(i);
+        System.out.println(sessions);
 }*/
 }

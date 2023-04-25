@@ -11,7 +11,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>FAP University Academic Portal</title>
-
+        <link rel="icon" href="https://inbienquangcao.vn/wp-content/uploads/2020/12/Nhu%CC%9B%CC%83ng-tho%CC%82ng-%C4%91ie%CC%A3%CC%82p-sa%CC%82u-sa%CC%86%CC%81c-phi%CC%81a-sau-logo-FPT.png" />
+        
         <!-- link bootstrap -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
@@ -65,10 +66,10 @@
                                 <a href="timetable?email=${sessionScope.account.email}" ><i class="fas fa-table"></i> Timetable</a>
                             </li>
                             <li>
-                                <a href="#" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
+                                <a href="group?email=${sessionScope.account.email}&gid=-1" ><i class="fa-solid fa-file"></i> View Report Attendance</a>
                             </li>
                             <li>
-                                <a href="#" ><i class="fas fa-calendar-check"></i> Take Attendance</a>
+                                <a href="getInfo?emailInfo=${sessionScope.account.email}&gidInfo=-1&seInfo=-1&gid=-1&seid=-1&email=${sessionScope.account.email}" ><i class="fas fa-calendar-check"></i> Take Attendance</a>
                             </li>
                             <li>
                                 <a href="#" ><i class="fa-solid fa-comment"></i> Feedback</a>

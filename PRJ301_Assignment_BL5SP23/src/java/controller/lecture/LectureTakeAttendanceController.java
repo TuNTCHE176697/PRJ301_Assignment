@@ -5,9 +5,11 @@
 package controller.lecture;
 
 
-import controller.auth.lecture.BaseAuthorizationController;
+
+import controller.both.BaseAuthController;
 import dal.SessionDBContext;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -16,7 +18,7 @@ import model.Attendance;
 import model.Session;
 import model.Student;
 
-public class LectureTakeAttendanceController extends BaseAuthorizationController  {
+public class LectureTakeAttendanceController extends BaseAuthController  {
 
     
 
@@ -29,8 +31,7 @@ public class LectureTakeAttendanceController extends BaseAuthorizationController
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void processGet(HttpServletRequest request, HttpServletResponse response,Account account) 
+    protected void processGet(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         int seid = Integer.parseInt(request.getParameter("seid"));
         SessionDBContext SesDB = new SessionDBContext();
@@ -48,8 +49,8 @@ public class LectureTakeAttendanceController extends BaseAuthorizationController
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    @Override
-    protected void processPost(HttpServletRequest request, HttpServletResponse response,Account account) 
+    
+    protected void processPost(HttpServletRequest request, HttpServletResponse response) 
             throws ServletException, IOException {
         Session ses = new Session();
         ses.setId(Integer.parseInt(request.getParameter("seid")));

@@ -22,6 +22,18 @@ public class Session {
     private int index;
     
     private ArrayList<Attendance> attendances = new ArrayList<>();
+    
+    private Attendance attendance;
+
+    public Attendance getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(Attendance attendance) {
+        this.attendance = attendance;
+    }
+    
+    
 
     public Session() {
     }

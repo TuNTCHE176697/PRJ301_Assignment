@@ -5,6 +5,7 @@
 
 package controller.lecture;
 
+import controller.both.BaseAuthController;
 import dal.LectureDBContext;
 import dal.TimeSlotDBContext;
 import java.io.IOException;
@@ -24,7 +25,7 @@ import util.DateTimeHelper;
  *
  * @author admin
  */
-public class LectureTimetableController extends HttpServlet {
+public class LectureTimetableController extends BaseAuthController {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -87,7 +88,7 @@ public class LectureTimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     } 
@@ -100,7 +101,7 @@ public class LectureTimetableController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         processRequest(request, response);
     }

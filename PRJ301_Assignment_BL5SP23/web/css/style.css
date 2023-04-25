@@ -213,19 +213,23 @@ body {
                 font-weight: bold;
             }
             table tr td {
-                border:1px solid background;
+                border: 2px solid #bf7e84;
                 padding: 3px 20px;
             }
 
             .table .htable{
-                background-image: linear-gradient(to left, rgb(201, 41, 198) ,rgb(28, 63, 205));
+              
                 color: white;
                 text-align: center;
             }
-
+            
+            .table tr.htable:first-child {
+             background-color: #99111d;
+            }
+            
             .attended {
                 text-decoration: none;
-                color: green;
+                color: #0a950e;
             }
             .not_yet {
                 text-decoration: none;
@@ -311,3 +315,4 @@ body {
             .container-fluid{
                 background-color: #fff2f1;
             }
+            

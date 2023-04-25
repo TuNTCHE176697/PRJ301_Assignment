@@ -5,6 +5,7 @@
 
 package controller.student;
 
+import controller.both.BaseAuthController;
 import dal.StudentDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ import model.Student;
  *
  * @author admin
  */
-public class StudentInformationController extends HttpServlet {
+public class StudentInformationController extends BaseAuthController {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -54,7 +55,7 @@ public class StudentInformationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         Account acc =(Account) request.getSession().getAttribute("account");
         StudentDBContext db = new StudentDBContext();
@@ -71,7 +72,7 @@ public class StudentInformationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
        String raw_dob = request.getParameter("dob");
         String raw_phone = request.getParameter("phone");

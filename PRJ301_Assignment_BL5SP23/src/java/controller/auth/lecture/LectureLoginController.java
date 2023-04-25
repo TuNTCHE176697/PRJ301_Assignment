@@ -83,10 +83,8 @@ public class LectureLoginController extends HttpServlet {
         }
         else
         {
-            LectureDBContext Lecdb = new LectureDBContext();
-            int leid = Lecdb.getIdByEmail(account.getEmail());
+            
             request.getSession().setAttribute("account", account);
-            request.getSession().setAttribute("leid", leid);
             response.sendRedirect("home");
         }
         

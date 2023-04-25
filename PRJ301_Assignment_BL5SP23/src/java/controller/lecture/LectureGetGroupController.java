@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
-package controller.student;
+package controller.lecture;
 
 import controller.both.BaseAuthController;
 import java.io.IOException;
@@ -17,7 +17,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author admin
  */
-public class StudentHomeController extends BaseAuthController {
+public class LectureGetGroupController extends BaseAuthController {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -34,10 +34,10 @@ public class StudentHomeController extends BaseAuthController {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StudentHomeController</title>");  
+            out.println("<title>Servlet LectureGetGroupController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StudentHomeController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LectureGetGroupController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -54,7 +54,7 @@ public class StudentHomeController extends BaseAuthController {
     @Override
     protected void processGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        request.getRequestDispatcher("../view/student/home.jsp").forward(request, response);
+        processRequest(request, response);
     } 
 
     /** 

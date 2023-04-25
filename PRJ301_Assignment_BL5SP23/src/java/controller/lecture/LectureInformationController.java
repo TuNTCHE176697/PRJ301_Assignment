@@ -5,6 +5,7 @@
 
 package controller.lecture;
 
+import controller.both.BaseAuthController;
 import dal.LectureDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ import model.Lecture;
  *
  * @author admin
  */
-public class LectureInformationController extends HttpServlet {
+public class LectureInformationController extends BaseAuthController {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -54,7 +55,7 @@ public class LectureInformationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void processGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         LectureDBContext db = new LectureDBContext();
         Account account = (Account) request.getSession().getAttribute("account");
@@ -71,7 +72,7 @@ public class LectureInformationController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void processPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         String raw_dob = request.getParameter("dob");
         String raw_phone = request.getParameter("phone");

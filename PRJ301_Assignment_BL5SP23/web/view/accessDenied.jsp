@@ -10,12 +10,13 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Access Denied!</title>
-        <link rel="icon" href="assets/favicon/fu-favicon.jpg" />
+        <link rel="icon" href="https://inbienquangcao.vn/wp-content/uploads/2020/12/Nhu%CC%9B%CC%83ng-tho%CC%82ng-%C4%91ie%CC%A3%CC%82p-sa%CC%82u-sa%CC%86%CC%81c-phi%CC%81a-sau-logo-FPT.png" />
         <style>
             body{
-                background-color: black;
+                background-color: #bf7e84;
             }
             .content{
+                background-color: #fff2f1;
                 margin: 10em auto;
                 width: 50%;
                 padding: 15px;
@@ -24,22 +25,23 @@
                 border-radius: 9px;
             }
             .content h2{
-                font-size: 50px;
+                font-size: 25px;
                 font-family: cursive;
-                color: red;
+                color: #e0726c;
             }
             .content h3{
-                font-size: 18px;
+                font-size: 15px;
                 font-family: cursive;
-                color: white;
+                color: black;
             }
             button{
                 border: 1px solid #ccc;
-                border-radius: 9px;
+                border-radius: 7px;
                 font-family: cursive;
-                color: red;
+                color: white;
                 font-weight: bold;
                 font-size: 16px;
+                background: #ff4133;
             }
             .noti{
                 width: 70%;
@@ -56,10 +58,6 @@
             <h2>Access denied!</h2>
             <h3><< You must have account to access >></h3>
             <div class="noti">
-                <a style="color: white;
-                   font-family: cursive;
-                   font-weight: bold;
-                   font-size: 16px;">If you are not logged in</a>
                 <button onclick="Login();">> Click here to login</a</button
             </div>
         </div>
