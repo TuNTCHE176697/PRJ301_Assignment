@@ -23,7 +23,19 @@ public class Session {
     
     private ArrayList<Attendance> attendances = new ArrayList<>();
     
+    private ArrayList<Student> students = new ArrayList<>();
+    
     private Attendance attendance;
+
+    public ArrayList<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(ArrayList<Student> students) {
+        this.students = students;
+    }
+    
+    
 
     public Attendance getAttendance() {
         return attendance;

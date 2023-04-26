@@ -91,5 +91,30 @@ public class GroupDBContext extends DBContext{
 
         return groups;
     }
+    public ArrayList<Group> getGroupsByLectureId(int leid) {
+        ArrayList<Group> groups = new ArrayList<>();
+
+        try {
+            String sql = "SELECT * FROM [Group] WHERE leid = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, leid);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Group g = new Group();
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+
+                Subject s = new Subject();
+                s.setId(rs.getInt("subid"));
+                g.setSubject(s);
+
+                groups.add(g);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(GroupDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return groups;
+    }
     
 }

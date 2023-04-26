@@ -44,13 +44,10 @@
         <servlet-name>StudentTimetableController</servlet-name>
         <servlet-class>controller.student.StudentTimetableController</servlet-class>
     </servlet>
+    
     <servlet>
-        <servlet-name>StudentAttendanceReportController</servlet-name>
-        <servlet-class>controller.student.StudentAttendanceReportController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>LectureGroupController</servlet-name>
-        <servlet-class>controller.lecture.LectureGroupController</servlet-class>
+        <servlet-name>LectureAttendanceReportController</servlet-name>
+        <servlet-class>controller.lecture.LectureAttendanceReportController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LectureGetGroupController</servlet-name>
@@ -113,8 +110,8 @@
         <url-pattern>/student/attendancereport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LectureGroupController</servlet-name>
-        <url-pattern>/lecture/group</url-pattern>
+        <servlet-name>LectureAttendanceReportController</servlet-name>
+        <url-pattern>/lecture/attendancereport</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LectureGetGroupController</servlet-name>

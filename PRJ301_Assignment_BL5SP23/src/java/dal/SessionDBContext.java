@@ -201,12 +201,61 @@ public class SessionDBContext extends DBContext {
                 l.setId(rs.getInt("leid"));
                 l.setName(rs.getString("lename"));
                 s.setLecture(l);
-                
+
                 Attendance a = new Attendance();
                 a.setPresent(rs.getBoolean("present"));
                 a.setDescription(rs.getString("comment"));
                 s.setAttendance(a);
 
+                sessions.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return sessions;
+    }
+
+    public ArrayList<Session> getSessionsByLeidAndGid(int leid, int gid) {
+        ArrayList<Session> sessions = new ArrayList<>();
+        String sql = "select s.stuid, s.stuname, ses.seid, ses.[index], ses.date, ses.attend, g.gid, g.gname, a.present\n"
+                + "from Student s inner join Student_Group sg on sg.stuid = s.stuid\n"
+                + "		  inner join [Group] g on g.gid = sg.gid\n"
+                + "		  inner join [Session] ses on ses.gid = g.gid\n"
+                + "		  left join [Attendance] a on a.seid = ses.seid and a.stuid = s.stuid\n"
+                + "where g.gid = ? and ses.leid = ?";
+        PreparedStatement stm = null;
+        ResultSet rs = null;
+
+        try {
+            stm = connection.prepareStatement(sql);
+            stm.setInt(1, gid);
+            stm.setInt(2, leid);
+            rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Session s = new Session();
+                s.setIndex(rs.getInt("index"));
+                s.setId(rs.getInt("seid"));
+                s.setDate(rs.getDate("date"));
+                s.setAttendated(rs.getBoolean("attend"));
+
+                Group g = new Group();
+                g.setId(rs.getInt("gid"));
+                g.setName(rs.getString("gname"));
+                s.setGroup(g);
+
+                Attendance a = new Attendance();
+                a.setPresent(rs.getBoolean("present"));
+                s.setAttendance(a);
+                
+                ArrayList<Student> students = new ArrayList<>();
+                for (Student student: students)
+                {
+                    student.setId(rs.getInt("stuid"));
+                    student.setName(rs.getString("stuname"));
+                    students.add(student);   
+                }
+                s.setStudents(students);
                 sessions.add(s);
             }
         } catch (SQLException ex) {
